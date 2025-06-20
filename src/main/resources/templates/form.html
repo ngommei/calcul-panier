@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Calculateur de panier</title>
+</head>
+<body>
+<h2>Calculer le total du panier</h2>
+<form method="post" action="/calculer">
+    <label>Type de client:</label>
+    <select name="typeClient" id="typeClient" onchange="toggleFields()">
+        <option value="particulier">Particulier</option>
+        <option value="professionnel">Professionnel</option>
+    </select><br><br>
+
+    <div id="fieldsParticulier">
+        <label>Nom:</label><input type="text" name="nom"><br>
+        <label>Prénom:</label><input type="text" name="prenom"><br>
+    </div>
+
+    <div id="fieldsPro" style="display:none;">
+        <label>Chiffre d'affaires (€):</label><input type="number" name="caAnnuel"><br>
+    </div>
+
+    <hr>
+    <label>Quantité haut de gamme:</label><input type="number" name="haut" value="0"><br>
+    <label>Quantité milieu de gamme:</label><input type="number" name="milieu" value="0"><br>
+    <label>Quantité laptop:</label><input type="number" name="laptop" value="0"><br><br>
+
+    <button type="submit">Calculer</button>
+</form>
+
+<div th:if="${total}">
+    <h3>Total du panier : <span th:text="${total}"></span> €</h3>
+</div>
+
+<script>
+    function toggleFields() {
+        const type = document.getElementById("typeClient").value;
+        document.getElementById("fieldsParticulier").style.display = type === "particulier" ? "block" : "none";
+        document.getElementById("fieldsPro").style.display = type === "professionnel" ? "block" : "none";
+    }
+    window.onload = toggleFields;
+</script>
+</body>
+</html>
