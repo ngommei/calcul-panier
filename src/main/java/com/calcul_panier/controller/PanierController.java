@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PanierController {
-    @GetMapping("/test")
-    @ResponseBody
-    public String test() {
-        return "Le contrôleur fonctionne ✅";
-    }
 
     @GetMapping("/")
     public String showForm() {
